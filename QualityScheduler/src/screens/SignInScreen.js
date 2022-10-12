@@ -1,21 +1,26 @@
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, {useEffect, useState} from 'react'
+import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native'
+import React, {useEffect, useState, useContext} from 'react'
 import { auth } from '../../firebase'
 import { useNavigation } from '@react-navigation/native'
+
+//export const loggedInContext = React.createContext()
 
 const SignInScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const navigation = useNavigation()
+  //const navigation = useNavigation();
+
+  
 
   useEffect(() => {
+    
     const unsubscribe = auth.onAuthStateChanged(user => {
       if(user) {
-         navigation.replace("Home")
+         //navigation.replace("Home")
       }
     })
-
+ 
     return unsubscribe
   }, [])
 
@@ -29,12 +34,17 @@ const SignInScreen = () => {
     .catch(error => alert(error.message))
   }
 
+  //const [loggedIn, setLoggedIn] = useState(false)
   const handleLogin = () => {
+    
     auth
     .signInWithEmailAndPassword(email, password)
     .then(userCredentials => {
       const user = userCredentials.user;
       console.log("logged in with:", user.email);
+      //set the log in to true
+      //setLoggedIn(true)
+      //console.log(loggedIn)
     })
     .catch(error => alert(error.message))
   }
@@ -44,6 +54,7 @@ const SignInScreen = () => {
       style={styles.container}
       behavior="padding"
       >
+        <Image source={require('../../assets/POLogo.png')} />
         <View style={styles.inputContainer}>
         <TextInput
           placeholder="email"
@@ -62,12 +73,15 @@ const SignInScreen = () => {
         </View>
 
         <View style={styles.buttonContainer}>
+          {/* <loggedInContext.Provider value={loggedIn}> */}
           <TouchableOpacity
             onPress={handleLogin}
             style={styles.button}
           >
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
+          {/* </loggedInContext.Provider> */}
+          
 
           <TouchableOpacity
             onPress={handleSignUp}
@@ -129,7 +143,4 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 16,
   },
-
-  
-
 })
