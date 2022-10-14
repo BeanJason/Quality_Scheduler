@@ -1,13 +1,14 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, navigation } from 'react-native'
 import React, {useContext, useState} from 'react'
 import { auth } from '../../../firebase'
-import { useNavigation } from '@react-navigation/native'
+import TabNavigator from '../../navigation/TabNavigation'
 
 //export const loggedOutContext = React.createContext()
 
-const Supporvisor_Settings = () => {
+const Supporvisor_Settings = ({navigation}) => {
   //const [loggedOut, setLoggedOut] = useState(false)
     //const navigation = useNavigation()
+ 
     const handleSignOut = () =>{
         auth
             .signOut()
@@ -18,12 +19,24 @@ const Supporvisor_Settings = () => {
             })
             .catch(error => alert(error.message))
     }
+
+    // const handleNewUser = () => {
+    //   console.log("hadleNewUser clicked");
+    //   navigation.navigate("RegisterNewUser", {name: "RegisterNewUser"})
+    // }
+
   return (
     <View style={styles.container}>
       <Text>Settings: {auth.currentUser?.email}</Text>
       
       <View style={styles.buttonContainer}>
       {/* <loggedOutContext.Provider value={loggedOut}> */}
+      <TouchableOpacity
+        onPress={() => navigation.navigate('NewUser')}
+        style={styles.button}
+        >
+          <Text style={styles.buttonText}>Add New Tech</Text>
+      </TouchableOpacity>
       <TouchableOpacity
         onPress={handleSignOut}
         style={styles.button}
@@ -57,6 +70,7 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 15,
         borderRadius: 10,
+        marginVertical: 5,
         alignItems: 'center',
       },
       buttonText:{

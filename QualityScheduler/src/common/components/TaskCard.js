@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         padding: 10,
         width: Dimensions.get("window").width,
         marginVertical: 10,
-        elevation: 10,
+        elevation: 10, 
     },
     taskCompleteContainer: {
         borderColor: "rgba(0, 255, 108, 0.9)",

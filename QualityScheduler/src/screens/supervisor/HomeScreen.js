@@ -12,10 +12,7 @@ const HomeScreen = () => {
     {id: "1", title: "hotCheck"},
     {id: "2", title: "wash hands"},
   ]
-    
-
-  
-    
+          
   return (
     <SafeAreaView style ={commonStyles.safeContainer}>
       <View style={styles.container}>
