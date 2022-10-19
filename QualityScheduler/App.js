@@ -20,11 +20,14 @@ export default function App() {
   );
 }
 
+//const usersCollectionRef = collection(db, "users");
+
 const RootNavigation = () => {
   // const user = auth().currentUser;
   // console.log(user);
 
   const [loggedIn, setLoggedIn] = useState();
+  const [isManager, setIsManager] = useState();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
