@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import React, { useEffect, useState, useContext } from "react";
 import { auth } from "../../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+//import { collection, getDocs, addDoc } from "@firebase/firestore";
 
 const RegisterNewUser = ({ navigation }) => {
   const [FirstName, setFirstName] = useState("");
@@ -16,14 +18,25 @@ const RegisterNewUser = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignUp = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
+  // const usersCollectionRef = collection(db, "users");
+  // const createUser = async () => {
+  //   await addDoc(usersCollectionRef, {
+  //     firstName: FirstName,
+  //     LastName: LastName,
+  //     email: email,
+  //     password: password,
+  //   });
+  // };
+
+  const handleSignUp = async () => {
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Registered in with:", user.email);
+        //createUser();
       })
       .catch((error) => alert(error.message));
+    console.log("handleSignUp");
   };
 
   return (

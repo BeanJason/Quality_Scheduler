@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState, useContext } from "react";
 import { auth } from "../../firebase";
+import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 
 //export const loggedInContext = React.createContext()
@@ -20,7 +21,7 @@ const SignInScreen = () => {
   //const navigation = useNavigation();
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         //navigation.replace("Home")
       }
@@ -29,10 +30,9 @@ const SignInScreen = () => {
     return unsubscribe;
   }, []);
 
-  //const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false);
   const handleLogin = () => {
-    auth
-      .signInWithEmailAndPassword(email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("logged in with:", user.email);
@@ -41,6 +41,7 @@ const SignInScreen = () => {
         //console.log(loggedIn)
       })
       .catch((error) => alert(error.message));
+    console.log("handleLogIn");
   };
 
   return (
