@@ -10,7 +10,7 @@ import {
 import React, { useEffect, useState, useContext } from "react";
 import { auth, db } from "../../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, getDocs, addDoc } from "@firebase/firestore";
+import { collection, getDocs, addDoc, setDoc, doc } from "@firebase/firestore";
 
 const RegisterNewUser = ({ navigation }) => {
   const [FirstName, setFirstName] = useState("");
@@ -20,13 +20,27 @@ const RegisterNewUser = ({ navigation }) => {
 
   const usersCollectionRef = collection(db, "users");
   const createUser = async () => {
-    await addDoc(usersCollectionRef, {
+    let data = {
       firstName: FirstName,
       lastName: LastName,
       email: email,
       password: password,
-      type: "tech",
+      type: "Tech",
+    };
+    await setDoc(doc(db, "users", email), {
+      firstName: FirstName,
+      lastName: LastName,
+      email: email,
+      password: password,
+      type: "Tech",
     });
+    // await addDoc(usersCollectionRef,{
+    //   firstName: FirstName,
+    //   lastName: LastName,
+    //   email: email,
+    //   password: password,
+    //   type: "Tech",
+    // });
   };
 
   const handleSignUp = async () => {

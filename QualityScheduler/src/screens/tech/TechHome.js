@@ -13,7 +13,7 @@ import AuthStack from "../../navigation/AuthStack";
 import { commonStyles } from "../../common/styles";
 import TaskCard from "../../common/components/TaskCard";
 
-const HomeScreen = () => {
+const TechHome = () => {
   const DATA = [
     { id: "1", title: "hotCheck" },
     { id: "2", title: "wash hands" },
@@ -23,7 +23,7 @@ const HomeScreen = () => {
     <SafeAreaView style={commonStyles.safeContainer}>
       <View style={styles.container}>
         <Text>Welcome: {auth.currentUser?.email}</Text>
-        <Text>Manager Screen</Text>
+        <Text>Tech Screen</Text>
       </View>
       <View style={{ flex: 1 }}>
         <FlatList
@@ -36,7 +36,7 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default TechHome;
 
 const styles = StyleSheet.create({
   container: {

@@ -7,23 +7,21 @@ import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Feather from "react-native-vector-icons/Feather";
 
-import HomeScreen from "../screens/supervisor/HomeScreen";
-import Supporvisor_Settings from "../screens/supervisor/Supervisor_Settings";
-import RegisterNewUser from "../screens/supervisor/RegisterNewUser";
+import TechHome from "../screens/tech/TechHome";
+import TechSettings from "../screens/tech/TechSettings";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-const SupervisorSettingsStack = () => {
+const TechSettingsStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Settings" component={Supporvisor_Settings} />
-      <Stack.Screen name="NewUser" component={RegisterNewUser} />
+      <Stack.Screen name="TechSettings" component={TechSettings} />
     </Stack.Navigator>
   );
 };
 
-const TabNavigator = () => {
+const TechTabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -33,7 +31,7 @@ const TabNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={TechHome}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home-outline" color={color} size={size} />
@@ -41,8 +39,8 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="SettingsStack"
-        component={SupervisorSettingsStack}
+        name="TechSettingsStack"
+        component={TechSettingsStack}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="settings-outline" color={color} size={size} />
@@ -53,4 +51,4 @@ const TabNavigator = () => {
   );
 };
 
-export default TabNavigator;
+export default TechTabNavigator;
